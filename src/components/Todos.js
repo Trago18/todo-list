@@ -39,7 +39,7 @@ const Todos = () => {
         return (
             <tr key={item} >
                 <td >{item}</td>
-                <td onClick={(e) => removeItem(item)} ><i className="fas fa-times text-center text-black-50 pt-1"></i></td>
+                <td onClick={(e) => removeItem(item)} className="text-end me-2" ><i className="fas fa-times text-end text-black-50 mt-1"></i></td>
             </tr>
         )
     });
