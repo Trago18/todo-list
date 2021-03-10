@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
+import './Todos.css'
 
 const Todos = () => {
 
     const [value, setValue] = useState([]);
-    const [icon, setIcon] = useState();
-
-    // const [message, setMessage] = useState('No tasks, add a task');
 
     let addItem = (e) => {
         e.preventDefault();
@@ -14,14 +12,12 @@ const Todos = () => {
             const isOnTheList = value.includes(newValue);
 
             if (isOnTheList) {
-                //message
+                // message
             } else {
                 newValue !== "" && setValue([...value, newValue]);
             }
+            e.target.value = '';
         }
-
-        // this.addForm.reset();
-        // ref={input => this.addForm = input}
     }
 
     let removeItem = (item) => {
@@ -38,23 +34,18 @@ const Todos = () => {
         message = "What needs to be done?";
     }
 
-    let addIcon = () => {
-        setIcon("x");
-    }
-
-    let removeIcon = () => {
-        setIcon('');
-    }
-
 
     let loop = value.map(item => {
         return (
-            <tr key={item} onMouseOver={addIcon} onMouseOut={removeIcon}>
+            <tr key={item} >
                 <td >{item}</td>
-                <td onClick={(e) => removeItem(item)} className="text-center text-black-50" style={{ cursor: "pointer" }}>{icon}</td>
+                <td onClick={(e) => removeItem(item)} ><i className="fas fa-times text-center text-black-50 pt-1"></i></td>
             </tr>
         )
     });
+
+    let items = value.length;
+
 
     return (
         <div className="container-fluid">
@@ -63,12 +54,13 @@ const Todos = () => {
                 <tbody>
                     <tr>
                         <td>
-                            <input className="container border-0 shadow-none bg-light" type="text" placeholder={message} onKeyUp={addItem} /></td>
+                            <input className="inputClass border-0 bg-light" type="text" placeholder={message} onKeyUp={addItem} />
+                            </td>
                         <td></td>
                     </tr>
                     {loop}
                     <tr>
-                        <td>item left</td>
+                        <td className="text-black-50">{items} item left</td>
                     </tr>
                 </tbody>
             </table>
@@ -77,4 +69,3 @@ const Todos = () => {
 }
 
 export default Todos
-
